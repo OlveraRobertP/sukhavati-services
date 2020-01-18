@@ -8,12 +8,17 @@
 	<system-properties>
 		<property name="java.util.logging.config.file"
 			value="WEB-INF/logging.properties" />
-			
+
+		<property name="cloudsqldev"
+			value="jdbc:postgresql://192.168.0.21:5432/zukha?user=postgres&amp;password=sukhavati" />
+
+
 		<property name="cloudsql"
 			value="jdbc:postgresql://google/sukhavaty-core?cloudSqlInstance=sukhavaty-services:us-central1:sukhavaty-db&amp;socketFactory=com.google.cloud.sql.postgres.SocketFactory&amp;user=postgres&amp;password=J9sjzdzmOJHzK@88e" />
 
+		<property name="cloudsql.url"
+			value="jdbc:postgresql://192.168.0.21:5432/zukha?user=postgres&amp;password=sukhavati" />
+
 	</system-properties>
-
-
 
 </appengine-web-app>

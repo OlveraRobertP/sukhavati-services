@@ -29,19 +29,19 @@ public class TestConn extends HttpServlet {
 
     Connection conn;
 
-    final String getUserId = "SELECT id, name, age FROM person";
+    final String getUserId = "SELECT id, name FROM person";
 
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp)
         throws ServletException, IOException {
     	resp.getWriter().println("////////TestConsxaXZssn.......");
     	
-    	String url = System.getProperty("cloudsql");
-
+    	String url = System.getProperty("cloudsqldev");
+    	//String url = System.getProperty("cloudsql");
       // Find the user ID from the full name
       try (Connection conn = DriverManager.getConnection(url);ResultSet rs = conn.prepareStatement(getUserId).executeQuery()) {
         while (rs.next()) {
-        	resp.getWriter().println(rs.getInt("id")+" - "+rs.getString("name")+" - "+rs.getString("age"));
+        	resp.getWriter().println(rs.getInt("id")+" - "+rs.getString("name"));
         }
 
 
