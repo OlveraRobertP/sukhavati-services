@@ -4,16 +4,14 @@ import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-
-import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.criterion.Restrictions;
 
 import com.sukhavati.dao.PersistenceDao;
-
 
 /**
  * Clase base para todas las clases de persistencia; cualquier clase de acceso a
@@ -25,58 +23,68 @@ import com.sukhavati.dao.PersistenceDao;
  * @param <E> El tipo de objeto que esta mapeado a la BD
  */
 public class PersistenceDaoImpl<E> implements PersistenceDao<E> {
-	
-	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("Demo");
 
-	private SessionFactory sessionFactory = Persistence.createEntityManagerFactory("Demo").get;
+	private static SessionFactory sessionFactory;
 
 	protected Class<E> persistentClass;
 
-	@SuppressWarnings("unchecked")
-	public PersistenceDaoImpl() {
+	private Session session;
+
+	static {
+		// A SessionFactory is set up once for an application!
+		final StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure("config/hibernate.cfg.xml") // configures settings
+																									// from
+																									// hibernate.cfg.xml
+				.build();
+		try {
+			sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
+		} catch (Exception e) {
+			// The registry would be destroyed by the SessionFactory, but we had trouble
+			// building the SessionFactory
+			// so destroy it manually.
+			StandardServiceRegistryBuilder.destroy(registry);
+		}
+	}
+
+	{
 		this.persistentClass = (Class<E>) ((ParameterizedType) this.getClass().getGenericSuperclass())
 				.getActualTypeArguments()[0];
 	}
 
-	/**
-	 * @param sessionFactory Establece el sessionFactory
-	 */
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
+	@Override
+	public void openSession() {
+		this.session = this.sessionFactory.openSession();
 	}
 
-	protected Session getSession() {
-		return this.sessionFactory.getCurrentSession();
+	@Override
+	public void closeSession() {
+		this.session.close();
 	}
 
-	protected Criteria crearCriteria() {
-		return getSession().createCriteria(persistentClass);
-	}
-
-	protected Criteria crearCriteriaConAlias(String alias) {
-		return getSession().createCriteria(persistentClass, alias);
-	}
-
+	@Override
 	public void saveOrUpdate(E value) {
-		this.getSession().saveOrUpdate(persistentClass.getName(), value);
+		this.session.saveOrUpdate(persistentClass.getName(), value);
 	}
 
+	@Override
 	public void delete(E value) {
-		this.getSession().delete(persistentClass.getName(), value);
+		this.session.delete(persistentClass.getName(), value);
 	}
 
-	public List<E> findAll() {
-		return this.getSession().createCriteria(persistentClass).list();
-	}
-
+	@Override
 	public E findBy(String criteria, Object value) {
-		return (E) this.getSession().createCriteria(persistentClass).add(Restrictions.eq(criteria, value))
-				.uniqueResult();
+		return (E) this.session.createCriteria(persistentClass).add(Restrictions.eq(criteria, value)).uniqueResult();
+
 	}
 
+	@Override
 	public E findById(Serializable id) {
-		return (E) this.getSession().get(persistentClass, id);
+		return (E) this.session.get(persistentClass, id);
+	}
 
+	@Override
+	public List<E> findAll() {
+		return this.session.createCriteria(persistentClass).list();
 	}
 
 }

@@ -44,4 +44,8 @@ public interface PersistenceDao<E> {
 	 * @return
 	 */
 	public List<E> findAll();
+
+	void openSession();
+
+	void closeSession();
 }
