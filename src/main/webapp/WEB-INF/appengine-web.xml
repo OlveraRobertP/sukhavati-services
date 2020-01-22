@@ -11,14 +11,11 @@
 			value="WEB-INF/logging.properties" />
 
 		<!-- DEVELOPTMENT -->
-		<!-- <property name="cloudsqldev"
+		<property name="cloudsql.url"
 			value="jdbc:postgresql://192.168.0.21:5432/zukha?user=postgres&amp;password=sukhavati" />
 			
-		<property name="cloudsql.url"
-			value="jdbc:postgresql://192.168.0.21:5432/zukha?user=postgres&amp;password=sukhavati" /> -->
-			
 		<!-- PRODUCTION -->	
-		<property name="cloudsqldev"
+		<!-- <property name="cloudsqldev"
 			value="jdbc:postgresql://google/sukhavaty-core?cloudSqlInstance=sukhavaty-services:us-central1:sukhavaty-db&amp;socketFactory=com.google.cloud.sql.postgres.SocketFactory&amp;user=postgres&amp;password=J9sjzdzmOJHzK@88e" />
 			
 		<property name="cloudsql.url"
@@ -28,7 +25,7 @@
 		<property name="cloudsql"
 			value="jdbc:postgresql://google/sukhavaty-core?cloudSqlInstance=sukhavaty-services:us-central1:sukhavaty-db&amp;socketFactory=com.google.cloud.sql.postgres.SocketFactory&amp;user=postgres&amp;password=J9sjzdzmOJHzK@88e" />
 
-		
+		 -->
 
 	</system-properties>
 

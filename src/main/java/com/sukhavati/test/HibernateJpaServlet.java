@@ -27,7 +27,7 @@ public class HibernateJpaServlet extends HttpServlet {
 
 		Map<String, String> properties = new HashMap();
 		
-		properties.put("javax.persistence.jdbc.driver", "org.postgresql.Driver");
+		//properties.put("javax.persistence.jdbc.driver", "org.postgresql.Driver");
 		properties.put("javax.persistence.jdbc.url", System.getProperty("cloudsql.url"));
 		
 //		if (SystemProperty.environment.value() == SystemProperty.Environment.Value.Production) {
@@ -38,7 +38,7 @@ public class HibernateJpaServlet extends HttpServlet {
 //			properties.put("javax.persistence.jdbc.url", System.getProperty("cloudsql.url.dev"));
 //		}
 
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("Demo", properties);
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("Demo");
 
 		// Insert a few rows.
 		EntityManager em = emf.createEntityManager();
