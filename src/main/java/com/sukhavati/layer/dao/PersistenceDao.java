@@ -1,4 +1,4 @@
-package com.sukhavati.dao;
+package com.sukhavati.layer.dao;
 
 import java.io.Serializable;
 import java.util.List;

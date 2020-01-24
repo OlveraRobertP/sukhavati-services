@@ -8,9 +8,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.sukhavati.bo.PersonBo;
-import com.sukhavati.bo.impl.PersonBoImpl;
-import com.sukhavati.models.Person;
+import com.sukhavati.layer.bo.SecurityBo;
+import com.sukhavati.models.dao.User;
+import com.sukhavati.models.dto.UserDto;
+import com.sukhavati.rest.services.SecurityBoImpl;
 
 /**
  * Servlet implementation class HiberServletTest
@@ -32,10 +33,9 @@ public class HiberServletTest extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/plain");
-		PersonBo personBo = new PersonBoImpl();
-		for (Person p :  personBo.findAll()) {
-			response.getWriter().println(p.getId() + " " + p.getName());
-		}
+		SecurityBo personBo = new SecurityBoImpl();
+		UserDto p =  personBo.getUserByUserIdAndPassword("admin", "pass");
+		response.getWriter().println(p.getUserid() + " " + p.getUserName());
 	}
 
 	

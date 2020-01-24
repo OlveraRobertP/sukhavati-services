@@ -11,7 +11,7 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.criterion.Restrictions;
 
-import com.sukhavati.dao.PersistenceDao;
+import com.sukhavati.layer.dao.PersistenceDao;
 
 /**
  * Clase base para todas las clases de persistencia; cualquier clase de acceso a
@@ -32,7 +32,7 @@ public class PersistenceDaoImpl<E> implements PersistenceDao<E> {
 
 	static {
 		// A SessionFactory is set up once for an application!
-		final StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure("config/hibernate.cfg.xml") // configures settings
+		final StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure("com/sukhavati/config/hibernate.cfg.xml") // configures settings
 																									// from
 																									// hibernate.cfg.xml
 				.build();
@@ -59,6 +59,10 @@ public class PersistenceDaoImpl<E> implements PersistenceDao<E> {
 	@Override
 	public void closeSession() {
 		this.session.close();
+	}
+	
+	protected Session getSession() {
+		return session;
 	}
 
 	@Override

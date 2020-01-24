@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.sukhavati.models.Person;
+import com.sukhavati.models.dao.User;
 /**
  * Servlet implementation class HibernateJpaServlet
  */
@@ -51,9 +51,9 @@ public class HibernateJpaServlet extends HttpServlet {
 		// List all the rows.
 		em = emf.createEntityManager();
 		em.getTransaction().begin();
-		List<Person> result = em.createQuery("FROM Person", Person.class).getResultList();
-		for (Person g : result) {
-			res.getWriter().println(g.getId() + " " + g.getName());
+		List<User> result = em.createQuery("FROM User", User.class).getResultList();
+		for (User g : result) {
+			res.getWriter().println(g.getUserId() + " " + g.getUserName());
 		}
 		em.getTransaction().commit();
 		em.close();
