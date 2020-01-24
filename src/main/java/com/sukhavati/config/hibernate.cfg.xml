@@ -10,7 +10,8 @@
 
 		<!-- Database Connection Settings -->
 		<property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
-		<property name="hibernate.connection.url">jdbc:postgresql://192.168.0.21:5432/zukha?user=postgres&amp;password=sukhavati</property>
+		<!-- <property name="hibernate.connection.url">jdbc:postgresql://192.168.0.21:5432/zukha?user=postgres&amp;password=sukhavati</property> -->
+		<property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/zukha</property>
 		<property name="hibernate.connection.username">postgres</property>
 		<property name="hibernate.connection.password">sukhavati</property>
 
@@ -25,7 +26,7 @@
 		<property name="hibernate.c3p0.idle_test_period">2000</property>
 
 		<!-- Mapping With Model Class Containing Annotations -->
-		<mapping class="com.sukhavati.models.Person" />
+		<mapping class="com.sukhavati.models.dao.User" />
 
 	</session-factory>
 </hibernate-configuration>

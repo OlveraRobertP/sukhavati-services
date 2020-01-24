@@ -13,7 +13,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "")
+@Table(name = "zu_usuarios")
 public class User implements Serializable{
 
 	/**
@@ -22,21 +22,18 @@ public class User implements Serializable{
 	private static final long serialVersionUID = -8322025139459587835L;
 	
 	@Id
-	@Column (name = "", unique = true, nullable = false)
+	@Column (name = "id", unique = true, nullable = false)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@Column (name = "")
+	@Column (name = "user")
 	private String userId;
 	
-	@Column (name = "")
+	@Column (name = "name")
 	private String userName;
 	
-	@Column (name = "")
+	@Column (name = "password")
 	private String password;
-	
-	@Column (name = "")
-	private String email;
 	
 	@Override
 	public int hashCode() {

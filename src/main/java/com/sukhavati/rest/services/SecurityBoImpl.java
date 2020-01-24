@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -28,7 +30,9 @@ public class SecurityBoImpl implements SecurityBo {
 	private MenuDao menuDao = new MenuDaoImpl();
 
 	@Override
-	public UserDto getUserByUserIdAndPassword(String userId, String password) {
+	@GET
+	@Path("/getUser/{userId}/{pass}/")
+	public UserDto getUserByUserIdAndPassword(@PathParam("userId") String userId, @PathParam("pass") String password) {
 		userDao.openSession();
 		UserDto result = new UserDto(userDao.getUserByUserIdAndPassword(userId,password));
 		userDao.closeSession();
