@@ -40,7 +40,9 @@ public class SecurityBoImpl implements SecurityBo {
 	}
 
 	@Override
-	public List<MenuDto> getMenusByUser(String userId) {
+	@GET
+	@Path("/getMenusByUser/{userId}/")
+	public List<MenuDto> getMenusByUser(@PathParam("userId") String userId) {
 		List<MenuDto> result = new ArrayList<MenuDto>();
 		menuDao.openSession();
 		for(Menu m : menuDao.getMenusByUser(userId)) {
@@ -51,7 +53,9 @@ public class SecurityBoImpl implements SecurityBo {
 	}
 
 	@Override
-	public MenuDto[] getMenusByUser2(String userId) {
+	@GET
+	@Path("/getMenusByUser2/{userId}/")
+	public MenuDto[] getMenusByUser2(@PathParam("userId") String userId) {
 		List<MenuDto> result = getMenusByUser(userId);
 		if(result!=null) {
 			return result.toArray(new  MenuDto[result.size()]);

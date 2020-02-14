@@ -15,7 +15,7 @@ public class UserDto implements Serializable{
 	private static final long serialVersionUID = 9180697265364498234L;
 	
 	private Integer id;
-	private String userid;
+	private String userId;
 	private String userName;
 	private String emailId;
 	
@@ -25,7 +25,7 @@ public class UserDto implements Serializable{
 	public UserDto(User user) {
 		if(user!=null) {
 			this.id = user.getId();
-			this.userid = user.getUserId();
+			this.userId = user.getUserId();
 			this.userName = user.getUserName();
 		}		
 	}

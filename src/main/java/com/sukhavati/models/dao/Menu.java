@@ -13,7 +13,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "")
+@Table(name = "zu_menu")
 public class Menu implements Serializable {
 
 	/**
@@ -22,21 +22,21 @@ public class Menu implements Serializable {
 	private static final long serialVersionUID = 8071026029856166465L;
 
 	@Id
-	@Column (name = "", unique = true, nullable = false)
+	@Column (name = "id", unique = true, nullable = false)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer menuId;
 	
-	@Column (name = "")
+	@Column (name = "label")
 	private String label; 
 	
-	@Column (name = "")
+	@Column (name = "icon")
 	private String icon;
 	
-	@Column (name = "")
+	@Column (name = "routerLink")
 	private String routerLink;
 	
-	@Column (name = "")
-	private Boolean IsChildVisible;
+	@Column (name = "isChildVisible")
+	private Boolean isChildVisible;
 
 	@Override
 	public int hashCode() {
