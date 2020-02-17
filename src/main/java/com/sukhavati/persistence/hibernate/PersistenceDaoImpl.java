@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -54,6 +55,11 @@ public class PersistenceDaoImpl<E> implements PersistenceDao<E> {
 	@Override
 	public void openSession() {
 		this.session = this.sessionFactory.openSession();
+	}
+	
+	@Override
+	public Transaction beginTransaction() {
+		return this.session.beginTransaction();
 	}
 
 	@Override

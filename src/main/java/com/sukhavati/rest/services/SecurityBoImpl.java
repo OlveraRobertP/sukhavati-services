@@ -25,9 +25,9 @@ import com.sukhavati.persistence.hibernate.UserDaoImpl;
 public class SecurityBoImpl implements SecurityBo {
 
 	
-	private UserDao userDao = new UserDaoImpl();
+	private static UserDao userDao = new UserDaoImpl();
 	
-	private MenuDao menuDao = new MenuDaoImpl();
+	private static MenuDao menuDao = new MenuDaoImpl();
 
 	@Override
 	@GET

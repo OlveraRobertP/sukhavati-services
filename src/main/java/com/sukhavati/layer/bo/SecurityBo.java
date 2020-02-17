@@ -2,7 +2,6 @@ package com.sukhavati.layer.bo;
 
 import java.util.List;
 
-import com.sukhavati.models.dao.Menu;
 import com.sukhavati.models.dto.MenuDto;
 import com.sukhavati.models.dto.UserDto;
 

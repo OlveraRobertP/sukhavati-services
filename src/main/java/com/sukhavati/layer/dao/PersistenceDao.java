@@ -3,6 +3,8 @@ package com.sukhavati.layer.dao;
 import java.io.Serializable;
 import java.util.List;
 
+import org.hibernate.Transaction;
+
 /**
  * @author Roberto Olvera
  *
@@ -48,4 +50,6 @@ public interface PersistenceDao<E> {
 	void openSession();
 
 	void closeSession();
+
+	Transaction beginTransaction();
 }
