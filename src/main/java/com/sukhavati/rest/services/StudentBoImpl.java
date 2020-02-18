@@ -11,6 +11,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -46,7 +47,7 @@ public class StudentBoImpl implements StudentBo {
 		try {
 			studentDao.openSession();
 			for(Student m : studentDao.findAll()) {
-				result.add(new StudentDto(m));
+				result.add(new StudentDto(m,false));
 			}
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -54,6 +55,21 @@ public class StudentBoImpl implements StudentBo {
 			studentDao.closeSession();
 		}
 		return result;
+	}
+	
+	@Override
+	@GET
+	@Path("/getById/{id}")
+	public StudentDto getById(@PathParam("id") Integer id) {
+		try {
+			studentDao.openSession();
+			return  new StudentDto(studentDao.findById(id),true);			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			studentDao.closeSession();
+		}
+		return null;
 	}
 
 	@Override

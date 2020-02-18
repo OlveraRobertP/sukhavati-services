@@ -34,7 +34,7 @@ public class StudentDto implements Serializable{
 		
 	}
 	
-	public StudentDto(Student student){
+	public StudentDto(Student student,boolean incluldePhoto){
 		if(student != null) {
 			id = student.getId();
 			name = student.getFirstName();
@@ -53,7 +53,7 @@ public class StudentDto implements Serializable{
 			maritalStatus = student.getMaritalStatus();
 			comments = student.getComments();
 			extraComments = student.getExtraComments();
-			photo = student.getPhoto();
+			if(incluldePhoto)photo = student.getPhoto();
 		}
 		
 	}

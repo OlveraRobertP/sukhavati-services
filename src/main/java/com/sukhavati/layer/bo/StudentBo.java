@@ -20,5 +20,12 @@ public interface StudentBo {
 	 * @return
 	 */
 	javax.ws.rs.core.Response saveOrUpdate(StudentDto student);
+
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
+	StudentDto getById(Integer id);
 	
 }
