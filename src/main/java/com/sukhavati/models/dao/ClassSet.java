@@ -11,37 +11,34 @@ import javax.persistence.Table;
 
 import lombok.Data;
 
+/**
+ * 
+ * @author jrobolvp
+ *
+ */
 @Data
 @Entity
-@Table(name = "zu_users")
-public class User implements Serializable{
-
+@Table(name = "zu_class_set")
+public class ClassSet implements Serializable{
+	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -8322025139459587835L;
-	
+	private static final long serialVersionUID = -4961805565869366355L;
+
 	@Id
 	@Column (name = "id", unique = true, nullable = false)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@Column (name = "user")
-	private String userId;
+	@Column (name = "description")
+	private String description;
 	
-	@Column (name = "name")
-	private String userName;
+	@Column (name = "effective_days")
+	private Integer effectiveDays;
 	
-	@Column (name = "password")
-	private String password;
-	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
-		return result;
-	}
+	@Column (name = "effective_class")
+	private Integer ideffectiveClass;
 
 	@Override
 	public boolean equals(Object obj) {
@@ -51,13 +48,21 @@ public class User implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
-		if (userId == null) {
-			if (other.userId != null)
+		ClassSet other = (ClassSet) obj;
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!userId.equals(other.userId))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
 	}
 	
 	
