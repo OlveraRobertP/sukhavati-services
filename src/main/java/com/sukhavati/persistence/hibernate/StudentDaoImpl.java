@@ -26,4 +26,12 @@ public class StudentDaoImpl
 				.addOrder(Order.asc("id"))
 				.list();
 	}
+
+	@Override
+	public List<Student> findAllOrderByName() {
+		return super.getSession()
+				.createCriteria(Student.class)
+				.addOrder(Order.asc("firstName"))
+				.list();
+	}
 }

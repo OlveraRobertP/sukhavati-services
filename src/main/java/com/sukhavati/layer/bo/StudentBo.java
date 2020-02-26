@@ -17,9 +17,10 @@ public interface StudentBo {
 	/**
 	 * 
 	 * @param student
+	 * @param authString
 	 * @return
 	 */
-	javax.ws.rs.core.Response saveOrUpdate(StudentDto student);
+	javax.ws.rs.core.Response saveOrUpdate(StudentDto student, String authString);
 
 	/**
 	 * 
@@ -27,5 +28,7 @@ public interface StudentBo {
 	 * @return
 	 */
 	StudentDto getById(Integer id);
+
+	
 	
 }

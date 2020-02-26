@@ -84,7 +84,7 @@ public class Student  implements Serializable{
 	
 	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "mod_user")
-	private Integer user;
+	private User modUser;
 	
 	@Column(name = "mod_date")
 	private Date modDate;

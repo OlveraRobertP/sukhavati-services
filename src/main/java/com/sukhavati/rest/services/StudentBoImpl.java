@@ -5,6 +5,7 @@ package com.sukhavati.rest.services;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -24,6 +25,7 @@ import com.sukhavati.layer.dao.StudentDao;
 import com.sukhavati.models.dao.Student;
 import com.sukhavati.models.dto.StudentDto;
 import com.sukhavati.persistence.hibernate.StudentDaoImpl;
+import com.sukhavati.secure.AuthToken;
 import com.sukhavati.utils.DateFormat;
 import com.sukhavati.utils.ResponseCode;
 import com.sukhavati.utils.ResponseMessage;
@@ -47,7 +49,7 @@ public class StudentBoImpl implements StudentBo {
 		List<StudentDto> result = new ArrayList<StudentDto>();
 		try {
 			studentDao.openSession();
-			for(Student m : studentDao.findAll()) {
+			for(Student m : studentDao.findAllOrderByName()) {
 				result.add(new StudentDto(m,false));
 			}
 		}catch (Exception e) {
@@ -78,12 +80,15 @@ public class StudentBoImpl implements StudentBo {
 	@PUT
 	@Path("/save/")
 	//@Consumes(MediaType.APPLICATION_JSON)
-	public Response saveOrUpdate(StudentDto student) {
+	public Response saveOrUpdate(StudentDto student,@HeaderParam("Authorization") String authString) {
 		ResponseMessage result = new ResponseMessage(ResponseCode.OK.toString());
 		try {
 			studentDao.openSession();
 			Transaction tx = studentDao.beginTransaction();
-			studentDao.saveOrUpdate(fromDto(student));
+			Student s = fromDto(student);
+			s.setModDate(new Date());
+			s.setModUser(AuthToken.getUserByAuth(authString));
+			studentDao.saveOrUpdate(s);
 			tx.commit();
 		}catch (Exception e) {
 			e.printStackTrace();

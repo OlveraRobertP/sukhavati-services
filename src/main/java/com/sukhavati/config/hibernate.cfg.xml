@@ -13,14 +13,14 @@
 		
 		<!-- DESARROLLO -->
 		<property name="hibernate.connection.url">jdbc:postgresql://192.168.0.21:5432/zukha</property>
-		<!-- <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/zukha</property>  -->
+		<!-- <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/zukha</property> --> 
 		<property name="hibernate.connection.username">postgres</property>
 		<property name="hibernate.connection.password">sukhavati</property>
 		
 		<!-- PRODUCCION -->
-		<!-- <property name="hibernate.connection.url">jdbc:postgresql://google/sukhavaty-core?cloudSqlInstance=sukhavaty-services:us-central1:sukhavaty-db&amp;socketFactory=com.google.cloud.sql.postgres.SocketFactory&amp;user=postgres&amp;password=J9sjzdzmOJHzK@88e</property>
-		<property name="hibernate.connection.username">postgres</property>
-		<property name="hibernate.connection.password">J9sjzdzmOJHzK@88e</property> -->
+		<!-- <property name="hibernate.connection.url">jdbc:postgresql://google/core?cloudSqlInstance=sukhavaty-services:us-central1:sukha&amp;socketFactory=com.google.cloud.sql.postgres.SocketFactory&amp;user=core&amp;password=sukhavati2020</property>
+		<property name="hibernate.connection.username">core</property>
+		<property name="hibernate.connection.password">sukhavati2020</property> -->
 		
 		<!-- Specifying Session Context -->
 		<property name="hibernate.current_session_context_class">org.hibernate.context.internal.ThreadLocalSessionContext</property>
@@ -38,7 +38,7 @@
 		<mapping class="com.sukhavati.models.dao.UserMenu" />
 		<mapping class="com.sukhavati.models.dao.Menu" />
 		<mapping class="com.sukhavati.models.dao.Student" />
-		<mapping class="com.sukhavati.models.dao.ClassSet" />
-		<mapping class="com.sukhavati.models.dao.PaymentMethod" />
+		<!-- <mapping class="com.sukhavati.models.dao.ClassSet" />
+		<mapping class="com.sukhavati.models.dao.PaymentMethod" /> -->
 	</session-factory>
 </hibernate-configuration>

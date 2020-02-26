@@ -3,6 +3,7 @@ package com.sukhavati.models.dto;
 import java.io.Serializable;
 
 import com.sukhavati.models.dao.Student;
+import com.sukhavati.models.dao.User;
 import com.sukhavati.utils.DateFormat;
 import com.sukhavati.utils.TypeFormatDate;
 
