@@ -2,8 +2,8 @@ package com.sukhavati.models.dto;
 
 import java.io.Serializable;
 
+import com.sukhavati.models.dao.Sepomex;
 import com.sukhavati.models.dao.Student;
-import com.sukhavati.models.dao.User;
 import com.sukhavati.utils.DateFormat;
 import com.sukhavati.utils.TypeFormatDate;
 
@@ -22,14 +22,11 @@ public class StudentDto implements Serializable{
 	private String address;
 	private String gender;
 	private String rfc;
-	private String zipCode;
-	private String colonia;
-	private String region;
-	private String city;
 	private String maritalStatus;
 	private String comments;
 	private String extraComments;
 	private String photo;
+	private Sepomex sepomex;
 	
 	public StudentDto(){
 		
@@ -47,14 +44,11 @@ public class StudentDto implements Serializable{
 			address = student.getAddress();
 			gender = student.getGender();
 			rfc = student.getRfc();
-			zipCode = student.getZipCode();
-			colonia = student.getColonia();
-			region = student.getRegion();
-			city = student.getCity();
 			maritalStatus = student.getMaritalStatus();
 			comments = student.getComments();
 			extraComments = student.getExtraComments();
 			if(incluldePhoto)photo = student.getPhoto();
+			sepomex = student.getSepomex();
 		}
 		
 	}

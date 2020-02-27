@@ -17,6 +17,7 @@ public class DateFormat {
 	private static SimpleDateFormat sdfLong = new SimpleDateFormat("dd/MM/yyyy");
 	
 	public static String toString(Date date, TypeFormatDate type) {
+		if(date==null) return null;
 		if(TypeFormatDate.SHORT.equals(type)) {
 			return sdfShort.format(date);
 		}else if(TypeFormatDate.MEDIUM.equals(type)) {
@@ -28,6 +29,7 @@ public class DateFormat {
 	}
 
 	public static Date toDate(String date, TypeFormatDate type) throws ParseException {
+		if(date==null) return null;
 		if(TypeFormatDate.SHORT.equals(type)) {
 			return sdfShort.parse(date);
 		}else if(TypeFormatDate.MEDIUM.equals(type)) {

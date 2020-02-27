@@ -97,4 +97,9 @@ public class PersistenceDaoImpl<E> implements PersistenceDao<E> {
 		return this.session.createCriteria(persistentClass).list();
 	}
 
+	@Override
+	public List<E> findAllBy(String criteria, Object value) {
+		return  this.session.createCriteria(persistentClass).add(Restrictions.eq(criteria, value)).list();
+	}
+
 }

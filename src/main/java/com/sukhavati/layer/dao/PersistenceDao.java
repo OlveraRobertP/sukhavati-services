@@ -46,6 +46,14 @@ public interface PersistenceDao<E> {
 	 * @return
 	 */
 	public List<E> findAll();
+	
+	/**
+	 * Devuelve todos los elemnetos de un Entity
+	 * @param criteria
+	 * @param value
+	 * @return
+	 */
+	public List<E> findAllBy(String criteria, Object value);
 
 	void openSession();
 

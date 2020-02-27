@@ -112,11 +112,10 @@ public class StudentBoImpl implements StudentBo {
 		res.setMobileNumber(s.getMobileNumber());
 		res.setPhoneNumber(s.getPhoneNumber());
 		res.setAddress(s.getAddress());
-		res.setZipCode(s.getZipCode());
-		res.setColonia(s.getColonia());
-		res.setRegion(s.getRegion());
-		res.setCity(s.getCity());
 		res.setGender(s.getGender());
+		if(s != null && s.getId() != null) {
+			res.setSepomex(s.getSepomex());
+		}		
 		res.setMaritalStatus(s.getMaritalStatus());
 		res.setComments(s.getComments());
 		res.setExtraComments(s.getExtraComments());

@@ -54,17 +54,9 @@ public class Student  implements Serializable{
 	@Column (name = "direccion")
 	private String address;
 	
-	@Column (name = "codigo_postal")
-	private String zipCode;
-	
-	@Column (name = "colonia")
-	private String colonia;
-	
-	@Column (name = "municipio")
-	private String region;
-	
-	@Column (name = "estado")
-	private String city;
+	@ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "sepomex")
+	private Sepomex sepomex;
 	
 	@Column (name = "genero")
 	private String gender;
