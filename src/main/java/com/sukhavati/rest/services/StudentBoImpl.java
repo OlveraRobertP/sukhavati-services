@@ -113,7 +113,7 @@ public class StudentBoImpl implements StudentBo {
 		res.setPhoneNumber(s.getPhoneNumber());
 		res.setAddress(s.getAddress());
 		res.setGender(s.getGender());
-		if(s != null && s.getId() != null) {
+		if(s.getSepomex() != null && s.getSepomex().getId() != null) {
 			res.setSepomex(s.getSepomex());
 		}		
 		res.setMaritalStatus(s.getMaritalStatus());
