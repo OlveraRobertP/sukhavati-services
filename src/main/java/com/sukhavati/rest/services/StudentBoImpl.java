@@ -6,7 +6,9 @@ package com.sukhavati.rest.services;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -80,7 +82,9 @@ public class StudentBoImpl implements StudentBo {
 	@PUT
 	@Path("/save/")
 	//@Consumes(MediaType.APPLICATION_JSON)
-	public Response saveOrUpdate(StudentDto student,@HeaderParam("Authorization") String authString) {
+	public Map<Response,StudentDto> saveOrUpdate(StudentDto student,@HeaderParam("Authorization") String authString) {
+		Map<Response,Student> res = new HashMap<Response,Student> ();
+		StudentDto stud = student;
 		ResponseMessage result = new ResponseMessage(ResponseCode.OK.toString());
 		try {
 			studentDao.openSession();
@@ -90,6 +94,7 @@ public class StudentBoImpl implements StudentBo {
 			s.setModUser(AuthToken.getUserByAuth(authString));
 			studentDao.saveOrUpdate(s);
 			tx.commit();
+			stud = new StudentDto(s, true);
 		}catch (Exception e) {
 			e.printStackTrace();
 			result.setCode(ResponseCode.ERROR.toString());
@@ -97,8 +102,8 @@ public class StudentBoImpl implements StudentBo {
 		}finally {
 			studentDao.closeSession();
 		}
-		return Response.status(201).entity(result).build();
-		//return result;
+		res.put(Response.status(201).entity(result).build(), stud);
+		return res ;
 	}
 	
 	private Student fromDto(StudentDto s) throws ParseException {
