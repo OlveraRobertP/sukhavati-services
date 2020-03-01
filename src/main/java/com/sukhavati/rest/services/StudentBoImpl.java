@@ -6,9 +6,7 @@ package com.sukhavati.rest.services;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -29,8 +27,6 @@ import com.sukhavati.models.dto.StudentDto;
 import com.sukhavati.persistence.hibernate.StudentDaoImpl;
 import com.sukhavati.secure.AuthToken;
 import com.sukhavati.utils.DateFormat;
-import com.sukhavati.utils.ResponseCode;
-import com.sukhavati.utils.ResponseMessage;
 import com.sukhavati.utils.TypeFormatDate;
 
 /**
@@ -82,12 +78,16 @@ public class StudentBoImpl implements StudentBo {
 	@PUT
 	@Path("/save/")
 	//@Consumes(MediaType.APPLICATION_JSON)
-	public Map<Response,StudentDto> saveOrUpdate(StudentDto student,@HeaderParam("Authorization") String authString) {
-		Map<Response,Student> res = new HashMap<Response,Student> ();
+	public Response saveOrUpdate(StudentDto student,@HeaderParam("Authorization") String authString) {
 		StudentDto stud = student;
-		ResponseMessage result = new ResponseMessage(ResponseCode.OK.toString());
 		try {
 			studentDao.openSession();
+			if(student.getId() == null || student.getId() == 0) {
+				//validar rfc
+				if(studentDao.findBy("rfc", student.getRfc()) != null) {
+					return Response.status(Response.Status.BAD_REQUEST).entity("Ya existe el alumno").build();
+				}
+			}
 			Transaction tx = studentDao.beginTransaction();
 			Student s = fromDto(student);
 			s.setModDate(new Date());
@@ -97,13 +97,11 @@ public class StudentBoImpl implements StudentBo {
 			stud = new StudentDto(s, true);
 		}catch (Exception e) {
 			e.printStackTrace();
-			result.setCode(ResponseCode.ERROR.toString());
-			result.setMessage(e.getMessage());
+			return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build(); 
 		}finally {
 			studentDao.closeSession();
 		}
-		res.put(Response.status(201).entity(result).build(), stud);
-		return res ;
+		return Response.status(Response.Status.OK).entity(stud).build(); 
 	}
 	
 	private Student fromDto(StudentDto s) throws ParseException {
@@ -111,7 +109,11 @@ public class StudentBoImpl implements StudentBo {
 		res.setId(s.getId());
 		res.setFirstName(s.getName());
 		res.setLastName(s.getLastName());
-		res.setBirthDate(DateFormat.toDate(s.getBirthDate(),TypeFormatDate.SHORT));
+		try {
+			res.setBirthDate(DateFormat.toDate(s.getBirthDate(),TypeFormatDate.SHORT));
+		}catch(java.text.ParseException e) {
+			res.setBirthDate(DateFormat.toDate(s.getBirthDate(),TypeFormatDate.FULL));
+		}
 		res.setRfc(s.getRfc());
 		res.setEmail(s.getEmail());
 		res.setMobileNumber(s.getMobileNumber());
