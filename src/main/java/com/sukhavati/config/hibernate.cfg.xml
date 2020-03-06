@@ -38,7 +38,8 @@
 		<mapping class="com.sukhavati.models.dao.Menu" />
 		<mapping class="com.sukhavati.models.dao.Student" />
 		<mapping class="com.sukhavati.models.dao.Sepomex" />
-		<!-- <mapping class="com.sukhavati.models.dao.ClassSet" />
-		<mapping class="com.sukhavati.models.dao.PaymentMethod" /> -->
+		<!-- liberar tablas  -->
+		<mapping class="com.sukhavati.models.dao.ClassSet" />
+		<mapping class="com.sukhavati.models.dao.PaymentMethod" />
 	</session-factory>
 </hibernate-configuration>
